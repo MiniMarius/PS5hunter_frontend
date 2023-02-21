@@ -17,6 +17,17 @@ function StarterView() {
         .then((res) => setProducts(res.data))
       .catch((err) => console.log(err));
     }, []);
+
+    const handleClick = () => {
+        axios.get('/run_scraper/')
+          .then(response => {
+            console.log(response.data);
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      };
+
     console.log(products)
     return (
         <div>
@@ -48,6 +59,7 @@ function StarterView() {
                 </TableBody>
             </Table>)
 }
+        <Button variant="contained" color="primary" onClick={handleClick}>Run Scraper</Button>
             </Box>
         </div>
     )
