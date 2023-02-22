@@ -5,7 +5,6 @@ import ResponsiveAppBar from "../components/ResponsiveAppBar";
 import axios from "axios";
 import ProductTable from "../components/ProductTable";
 import CircularProgress from "@mui/material/CircularProgress";
-import { flexbox } from "@mui/system";
 function StarterView() {
     const [products, setProducts] = React.useState(null);
     const [isLoading, setIsLoading] = React.useState(true);
@@ -35,8 +34,8 @@ function StarterView() {
     };
   
     return (
-      <div>
-        <ResponsiveAppBar></ResponsiveAppBar>
+      <>
+        <ResponsiveAppBar style={{ position: "fixed", width: "100%" }}></ResponsiveAppBar>
         <Box display="flex" flexDirection="column" alignItems="stretch">
           <img src={bigLogo} alt="PS5 Hunter Logo" />
           <Button variant="contained" color="primary" onClick={handleClick} disabled={isLoading}>
@@ -44,7 +43,7 @@ function StarterView() {
           </Button>
           {isLoading ? (<Box display="flex" flexDirection="column" alignItems="center" padding={1}>Getting new data</Box>) : (<ProductTable products={products}></ProductTable>)}
         </Box>
-      </div>
+    </>
     );
   }
   
