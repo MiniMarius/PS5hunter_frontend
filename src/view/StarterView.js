@@ -48,16 +48,18 @@ function StarterView() {
     return (
       <Box style={{ backgroundImage: `url(${backgroundImage})`, minHeight: "100vh"}}>
         <ResponsiveAppBar style={{ position: "fixed", width: "100%" }} />
-          <Box display="flex" flexDirection="column" alignItems="stretch" padding={2}>
+          <Box display="flex" flexDirection="column" alignItems="stretch" padding={2} marginTop={8}>
+            <Box>
             <Button variant="contained" color="primary" onClick={handleClick} disabled={isLoading}>
               {isLoading ? <CircularProgress size={24} /> : "Run Scraper"}
             </Button>
+            </Box>
             {isLoading ? (
               <Box display="flex" flexDirection="column" alignItems="center" padding={1}>
                 Getting new data
               </Box>
             ) : (
-              <Box marginLeft="auto" bgcolor="background.paper" p={2}>
+              <Box marginLeft="auto" bgcolor="background.paper" p={2} width={1} maxWidth={500}>
                 <ProductTable products={products} />
               </Box>
             )}
