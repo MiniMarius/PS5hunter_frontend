@@ -45,7 +45,6 @@ const ProductTable = ({ products }) => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell onClick={() => handleSortClick("id")}>ID</TableCell>
                 <TableCell onClick={() => handleSortClick("website")}>
                   Website
                 </TableCell>
@@ -59,7 +58,6 @@ const ProductTable = ({ products }) => {
             <TableBody>
               {sortedProducts.map((item) => (
                 <TableRow key={item.id}>
-                    <TableCell>{item.id}</TableCell>
                     <TableCell>
                         <Link href={item.url} color="inherit">
                             {item.website}
