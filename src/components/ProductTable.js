@@ -48,7 +48,7 @@ const ProductTable = ({ products }) => {
                 <TableCell onClick={() => handleSortClick("website")}>
                   Website
                 </TableCell>
-                <TableCell onClick={() => handleSortClick("name")}>Name</TableCell>
+                <TableCell onClick={() => handleSortClick("name")}>Product</TableCell>
                 <TableCell onClick={() => handleSortClick("availability")}>
                   Availability
                 </TableCell>

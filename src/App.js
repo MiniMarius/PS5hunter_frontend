@@ -1,14 +1,14 @@
 import React from "react";
 import {Route, Routes} from "react-router-dom"
-import StartView from "./view/StartView"
-import ResultsView from "./view/ResultsView"
+import ResultsPresenter from "./presenter/ResultsPresenter";
+import StartPresenter from "./presenter/StartPresenter";
 
 function App() {
     return (
         <div>
             <Routes>
-                <Route path="/" element={<StartView/>}/>
-                <Route path="/results" element={<ResultsView/>}/>
+                <Route path="/" element={<StartPresenter/>}/>
+                <Route path="/results" element={<ResultsPresenter/>}/>
             </Routes>
         </div>
     );
