@@ -1,13 +1,14 @@
 import React from "react";
-import {Container} from "@mui/material";
 import {Route, Routes} from "react-router-dom"
-import StarterView from "./view/StarterView"
+import StartView from "./view/StartView"
+import ResultsView from "./view/ResultsView"
 
 function App() {
     return (
         <div>
             <Routes>
-                <Route path="/" element={<StarterView/>}/>
+                <Route path="/" element={<StartView/>}/>
+                <Route path="/results" element={<ResultsView/>}/>
             </Routes>
         </div>
     );
