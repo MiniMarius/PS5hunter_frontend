@@ -25,6 +25,13 @@ function StartView({ handleNavigate }) {
           </FrostyButton>
         </Grid>
       </Grid>
+      <Box sx={{ marginTop: 'auto' }}>
+        <Container maxWidth="lg">
+          <Typography variant="body2" color="text.secondary" align="center" sx={{ py: 3 }}>
+            © 2023 Playstation 5 Hunter
+          </Typography>
+        </Container>
+      </Box>
     </>
   );
 }
