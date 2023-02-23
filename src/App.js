@@ -5,11 +5,11 @@ import StarterView from "./view/StarterView"
 
 function App() {
     return (
-        <Container maxWidth="lg" sx={{width: "100%"}}>
+        <div>
             <Routes>
                 <Route path="/" element={<StarterView/>}/>
             </Routes>
-        </Container>
+        </div>
     );
 }
 
