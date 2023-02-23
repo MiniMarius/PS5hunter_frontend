@@ -10,15 +10,26 @@ function StarterView() {
     const [isLoading, setIsLoading] = React.useState(true);
   
     useEffect(() => {
-      axios
-        .get("/api/product/")
-        .then((res) => {
+      let retries = 3;
+    
+      const fetchData = async () => {
+        try {
+          const res = await axios.get("/api/product/");
           setProducts(res.data);
           setIsLoading(false);
-        })
-        .catch((err) => console.log(err));
+        } catch (err) {
+          if (retries > 0) {
+            console.log(`Error fetching data. Retrying... ${retries} retries left.`);
+            retries--;
+            fetchData();
+          } else {
+            console.log("Error fetching data. Max retries exceeded.");
+          }
+        }
+      };
+    
+      fetchData();
     }, []);
-  
     const handleClick = () => {
       setIsLoading(true);
       axios
