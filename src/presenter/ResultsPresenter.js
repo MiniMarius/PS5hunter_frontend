@@ -29,9 +29,16 @@ function ResultsPresenter () {
         setIsLoading(true);
         axios
           .get("/run_scraper/")
-          .then((response) => {
-            console.log(response.data);
-            setIsLoading(false);
+          .then(() => {
+            axios.get("/api/product/")
+              .then((response) => {
+                setProducts(response.data);
+                setIsLoading(false);
+              })
+              .catch((error) => {
+                console.log(error);
+                setIsLoading(false);
+              });
           })
           .catch((error) => {
             console.log(error);

@@ -21,7 +21,7 @@ function StartView({ handleNavigate }) {
             Has the Playstation 5 been on your wishlist for a long time? Our web scraper can help you find the latest PlayStation from a variety of online stores, all in one place.
           </Typography>
           <FrostyButton variant="contained" color="primary" onClick={handleNavigate}>
-            Tools
+            Show me
           </FrostyButton>
         </Grid>
       </Grid>

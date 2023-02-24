@@ -7,6 +7,7 @@ import backgroundImage from "../assets/frosty_wallpaper.jpg";
 import FrostyButton from '../components/FrostyButton';
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
 function ResultsView({products, isLoading, handleClick}) {
   return (
     <Box style={{ backgroundImage: `url(${backgroundImage})`, minHeight: "100vh"}}>
@@ -34,6 +35,13 @@ function ResultsView({products, isLoading, handleClick}) {
             </Grid>
           </Grid>
         </Box>
+        <Box sx={{ marginTop: 'auto' }}>
+        <Container maxWidth="lg">
+          <Typography variant="body2" color="text.secondary" align="center" sx={{ py: 3 }}>
+            © 2023 Playstation 5 Hunter
+          </Typography>
+        </Container>
+      </Box>
     </Box>
   );
 }
