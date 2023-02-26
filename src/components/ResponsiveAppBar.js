@@ -10,10 +10,8 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import GamepadOutlinedIcon from '@mui/icons-material/GamepadOutlined';
-import HunterLogo from "../assets/img.png"
-import bigLogo from "../assets/ps5hunter.png";
+
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];

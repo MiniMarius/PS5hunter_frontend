@@ -8,7 +8,7 @@ import Link from "@mui/material/Link";
 import { Box } from "@mui/system";
 import ThumbUpAltOutlinedIcon from '@mui/icons-material/ThumbUpAltOutlined';
 import ThumbDownAltOutlinedIcon from '@mui/icons-material/ThumbDownAltOutlined';
-
+import { format, differenceInMinutes, differenceInHours, isToday } from 'date-fns'
 const ProductTable = ({ products }) => {
     const [sortColumn, setSortColumn] = React.useState(null);
     const [sortDirection, setSortDirection] = React.useState("asc");
@@ -38,48 +38,77 @@ const ProductTable = ({ products }) => {
         setSortDirection("asc");
       }
     };
-  
+
+    
+    function handleDate(dateString) {
+      const date = new Date(dateString);
+      const now = new Date();
+    
+      const minutesAgo = differenceInMinutes(now, date);
+      if (minutesAgo < 1) {
+        return 'just now';
+      }
+    
+      const hoursAgo = differenceInHours(now, date);
+      if (hoursAgo < 1) {
+        return 'an hour ago';
+      }
+    
+      if (isToday(date)) {
+        return format(date, "'today at' p");
+      }
+    
+      return format(date, 'MMMM d, yyyy p');
+    }
+      
     return (
       <>
         {products && products.length && (
           <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell onClick={() => handleSortClick("website")}>
-                  Website
+          <TableHead>
+            <TableRow>
+              <TableCell onClick={() => handleSortClick("website")}>
+                Website
+              </TableCell>
+              <TableCell onClick={() => handleSortClick("name")}>Product</TableCell>
+              <TableCell onClick={() => handleSortClick("availability")}>
+                Availability
+              </TableCell>
+              <TableCell onClick={() => handleSortClick("price")}>Price</TableCell>
+              <TableCell onClick={() => handleSortClick("dateUpdated")}>
+                Last Updated
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {sortedProducts.map((item) => (
+              <TableRow key={item.id}>
+                <TableCell>
+                  <Link
+                    href={`${item.website.url}${item.url}`}
+                    color="inherit"
+                  >
+                    {item.website.name}
+                  </Link>
                 </TableCell>
-                <TableCell onClick={() => handleSortClick("name")}>Product</TableCell>
-                <TableCell onClick={() => handleSortClick("availability")}>
-                  Availability
+                <TableCell>{item.name}</TableCell>
+                <TableCell>
+                  {item.availability ? (
+                    <Box display="flex" alignItems="center">
+                      <ThumbUpAltOutlinedIcon style={{ color: "green" }} />
+                    </Box>
+                  ) : (
+                    <Box display="flex" alignItems="center">
+                      <ThumbDownAltOutlinedIcon style={{ color: "red" }} />
+                    </Box>
+                  )}
                 </TableCell>
-                <TableCell onClick={() => handleSortClick("price")}>Price</TableCell>
+                <TableCell>{item.price}</TableCell>
+                <TableCell>{handleDate(item.dateUpdated)}</TableCell>
               </TableRow>
-            </TableHead>
-            <TableBody>
-              {sortedProducts.map((item) => (
-                <TableRow key={item.id}>
-                    <TableCell>
-                        <Link href={item.url} color="inherit">
-                            {item.website}
-                    </Link>
-                    </TableCell>
-                    <TableCell>{item.name}</TableCell>
-                    <TableCell>
-                    {item.availability ? (
-                      <Box display="flex" alignItems="center">
-                        <ThumbUpAltOutlinedIcon style={{ color: "green" }} />
-                      </Box>
-                    ) : (
-                      <Box display="flex" alignItems="center">
-                        <ThumbDownAltOutlinedIcon style={{ color: "red" }} />
-                      </Box>
-                    )}
-                  </TableCell>
-                  <TableCell>{item.price}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+            ))}
+          </TableBody>
+        </Table>
         )}
       </>
     );

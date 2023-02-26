@@ -27,7 +27,7 @@ function ResultsView({products, isLoading, handleClick}) {
                   </FrostyButton>
                 </Grid>
                 {!isLoading && (
-                  <Box marginTop={4} bgcolor="background.paper" p={2} width={1} maxWidth={800}>
+                  <Box marginTop={4} bgcolor="background.paper" p={2} width={1} maxWidth={1000}>
                     <ProductTable products={products} />
                   </Box>
                 )}
