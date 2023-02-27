@@ -84,12 +84,14 @@ const ProductTable = ({ products }) => {
             {sortedProducts.map((item) => (
               <TableRow key={item.id}>
                 <TableCell>
-                  <Link
-                    href={`${item.website.url}${item.url}`}
-                    color="inherit"
-                  >
-                    {item.website.name}
-                  </Link>
+                <Link
+                href={`${item.website.url}${item.url}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                color="inherit"
+                >
+                {item.website.name}
+                </Link>
                 </TableCell>
                 <TableCell>{item.name}</TableCell>
                 <TableCell>
