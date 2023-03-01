@@ -10,6 +10,7 @@ import DialogActions from "@mui/material/DialogActions"
 import DialogContent from "@mui/material/DialogContent"
 import DialogTitle from "@mui/material/DialogTitle"
 import Typography from "@mui/material/Typography";
+import axios from "axios";
 function FormView() {
     const [openForm, setOpenForm] = React.useState(false);
     const [website, setWebsite] = React.useState("");
@@ -32,16 +33,36 @@ function FormView() {
       setOpenForm(false);
     };
     const handleSubmit = () => {
-      // Handle form submission logic
-      console.log("Form submitted");
-      handleCloseForm();
+      // Create an object with the state variables
+      const scrapingObject = {
+        website,
+        websiteUrl,
+        productTag,
+        productFilter,
+        nameTag,
+        nameFilter,
+        priceTag,
+        priceFilter,
+        availabilityTag,
+        availabilityFilter,
+        urlTag,
+        urlFilter,
+      };
+    
+      // Send a POST request with the scrapingObject as the request body
+      axios.post("/create_scraping_object/", scrapingObject)
+        .then((response) => {
+          console.log(response);
+          handleCloseForm();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     };
-    const handleChange = (event, stateSetter) => {
-      stateSetter(event.target.value);
-    };
+
     return (
       <Box>
-        <FrostyButton variant="contained" color="primary" onClick={handleOpenForm}>Add a product
+        <FrostyButton variant="contained" color="primary" onClick={handleOpenForm}>Add website
         </FrostyButton>
         <Dialog open={openForm} onClose={handleCloseForm}>
           <DialogTitle>Add Website</DialogTitle>
@@ -67,7 +88,6 @@ function FormView() {
                   onChange={(event) => setWebsiteUrl(event.target.value)}
                 />
               </Grid>
-              {/* Add the following code to handle the unused states */}
               <Grid item xs={12}>
                 <Typography variant="subtitle1">Product Filter</Typography>
                 <TextField
@@ -153,7 +173,6 @@ function FormView() {
                   onChange={(event) => setUrlFilter(event.target.value)}
                 />
               </Grid>
-              {/* End of unused states code */}
             </Grid>
           </DialogContent>
           <DialogActions>
