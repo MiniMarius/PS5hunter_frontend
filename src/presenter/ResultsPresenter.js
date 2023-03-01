@@ -6,7 +6,6 @@ function ResultsPresenter () {
     const [isLoading, setIsLoading] = React.useState(true);
       useEffect(() => {
         let retries = 3;
-      
         const fetchData = async () => {
           try {
             const res = await axios.get("/api/product/");
@@ -46,7 +45,7 @@ function ResultsPresenter () {
           });
       };
   
-    return (<ResultsView products={products} isLoading={isLoading} handleClick={handleClick} />
+    return (<ResultsView products={products} isLoading={isLoading} handleClick={handleClick}/>
 
     )
 

@@ -8,12 +8,13 @@ import FrostyButton from '../components/FrostyButton';
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import WebsiteForm from "../components/WebsiteForm";
 function ResultsView({products, isLoading, handleClick}) {
   return (
     <Box style={{ backgroundImage: `url(${backgroundImage})`, minHeight: "100vh"}}>
       <ResponsiveAppBar style={{ position: "fixed", width: "100%" }} />
         <Box marginTop={8}>
-          <Grid container justifyContent="center" alignItems="center" style={{height: "100%"}}>
+          <Grid container justifyContent="center" alignItems="center" style={{height: "100%"}} direction="row">
             <Grid item xs={12} md={6}>
               <Box display="flex" flexDirection="column" alignItems="center" padding={2}>
                 <Grid item>
@@ -21,10 +22,11 @@ function ResultsView({products, isLoading, handleClick}) {
                     Scraped Products
                   </Typography>
                 </Grid>
-                <Grid item>
+                <Grid item direction="row">
                   <FrostyButton variant="contained" color="primary" onClick={handleClick} disabled={isLoading}>
                     {isLoading ? <CircularProgress size={24} /> : "Run Scraper"}
                   </FrostyButton>
+                  <WebsiteForm/>
                 </Grid>
                 {!isLoading && (
                   <Box marginTop={4} bgcolor="background.paper" p={2} width={1} maxWidth={1000}>
@@ -32,6 +34,7 @@ function ResultsView({products, isLoading, handleClick}) {
                   </Box>
                 )}
               </Box>
+              
             </Grid>
           </Grid>
         </Box>
