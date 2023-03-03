@@ -13,7 +13,7 @@ import Typography from "@mui/material/Typography";
 import axios from "axios";
 function FormView() {
     const [openForm, setOpenForm] = React.useState(false);
-    const [website, setWebsite] = React.useState("");
+    const [websiteName, setWebsiteName] = React.useState("");
     const [websiteUrl, setWebsiteUrl] = React.useState("");
     const [productTag, setProductTag] = React.useState("");
     const [productFilter, setProductFilter] = React.useState("");
@@ -32,33 +32,56 @@ function FormView() {
     const handleCloseForm = () => {
       setOpenForm(false);
     };
-    const handleSubmit = () => {
-      // Create an object with the state variables
-      const scrapingObject = {
-        website,
-        websiteUrl,
-        productTag,
-        productFilter,
-        nameTag,
-        nameFilter,
-        priceTag,
-        priceFilter,
-        availabilityTag,
-        availabilityFilter,
-        urlTag,
-        urlFilter,
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      const data = {
+        name: websiteName,
+        url: websiteUrl,
+        relatedTagData: {
+          productTag: productTag,
+          productFilter: {
+            "class": productFilter
+        },
+          nameTag: nameTag,
+          nameFilter: {
+            "class": nameFilter
+        },
+          priceTag: priceTag,
+          priceFilter: {
+            "class": priceFilter
+        },
+          availabilityTag: availabilityTag,
+          availabilityFilter: {
+            "class": availabilityFilter
+        },
+          urlTag: urlTag,
+          urlFilter: {
+            "class": urlFilter
+        },
+        },
       };
     
-      // Send a POST request with the scrapingObject as the request body
-      axios.post("/create_scraping_object/", scrapingObject)
-        .then((response) => {
-          console.log(response);
-          handleCloseForm();
-        })
-        .catch((error) => {
+      axios.post("/api/website/", data)
+      .then((response) => {
+        console.log(response);
+        handleCloseForm();
+      })
+      .catch((error) => {
+        // If a 409 conflict code is returned, send a PUT request instead
+        if (error.response && error.response.status === 409) {
+          axios.put(`/api/website/1/`, data)
+            .then((response) => {
+              console.log(response);
+              handleCloseForm();
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        } else {
           console.log(error);
-        });
-    };
+        }
+      });
+  };
 
     return (
       <Box>
@@ -74,8 +97,8 @@ function FormView() {
                   fullWidth
                   id="website-name"
                   label="Website name"
-                  value={website}
-                  onChange={(event) => setWebsite(event.target.value)}
+                  value={websiteName}
+                  onChange={(event) => setWebsiteName(event.target.value)}
                 />
                 </FormControl>
               </Grid>
@@ -93,14 +116,14 @@ function FormView() {
                 <TextField
                   fullWidth
                   id="product-tag"
-                  label="'tag type'"
+                  label="tag type"
                   value={productTag}
                   onChange={(event) => setProductTag(event.target.value)}
                 />
                 <TextField
                   fullWidth
                   id="product-filter"
-                  label="{'class': 'class name'}"
+                  label="class name"
                   value={productFilter}
                   onChange={(event) => setProductFilter(event.target.value)}
                 />
@@ -110,14 +133,14 @@ function FormView() {
                 <TextField
                   fullWidth
                   id="name-tag"
-                  label="'tag type'"
+                  label="tag type"
                   value={nameTag}
                   onChange={(event) => setNameTag(event.target.value)}
                 />
                 <TextField
                   fullWidth
                   id="name-filter"
-                  label="{'class': 'class name'}"
+                  label="class name"
                   value={nameFilter}
                   onChange={(event) => setNameFilter(event.target.value)}
                 />
@@ -127,14 +150,14 @@ function FormView() {
                 <TextField
                   fullWidth
                   id="price-tag"
-                  label="'tag type'"
+                  label="tag type"
                   value={priceTag}
                   onChange={(event) => setPriceTag(event.target.value)}
                 />
                 <TextField
                   fullWidth
                   id="price-filter"
-                  label="{'class': 'class name'}"
+                  label="class name"
                   value={priceFilter}
                   onChange={(event) => setPriceFilter(event.target.value)}
                 />
@@ -144,14 +167,14 @@ function FormView() {
                 <TextField
                   fullWidth
                   id="availability-tag"
-                  label="'tag type'"
+                  label="tag type"
                   value={availabilityTag}
                   onChange={(event) => setAvailabilityTag(event.target.value)}
                 />
                 <TextField
                   fullWidth
                   id="availability-filter"
-                  label="{'class': 'class name'}"
+                  label="class name"
                   value={availabilityFilter}
                   onChange={(event) => setAvailabilityFilter(event.target.value)}
                 />
@@ -161,14 +184,14 @@ function FormView() {
                 <TextField
                   fullWidth
                   id="url-tag"
-                  label="'tag type'"
+                  label="tag type"
                   value={urlTag}
                   onChange={(event) => setUrlTag(event.target.value)}
                 />
                 <TextField
                   fullWidth
                   id="url-filter"
-                  label="{'class': 'class name'}"
+                  label="class name"
                   value={urlFilter}
                   onChange={(event) => setUrlFilter(event.target.value)}
                 />
