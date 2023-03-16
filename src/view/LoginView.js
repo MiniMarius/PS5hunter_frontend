@@ -9,21 +9,29 @@ import Paper from "@mui/material/Paper"
 import { Box } from '@mui/system';
 import { FormControl } from '@mui/material';
 
+const LoginView = ({ onSubmit, isLoading, error }) => {
+  const [username, setUsername] = React.useState('');
+  const [password, setPassword] = React.useState('');
 
-
-const LoginView = ({ onSubmit }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
-    const { username, password } = event.target.elements;
-    onSubmit(username.value, password.value);
+    onSubmit(username, password);
   };
 
   return (
-    <Box style={{ backgroundImage: `url(${backgroundImage})`, minHeight: "100vh"}}>
-      <ResponsiveAppBar style={{ position: "fixed", width: "100%" }} />
-      <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" height="100vh">
-        <Paper elevation={3} style={{ padding: "2rem" }}>
-        <FormControl component="form" onSubmit={handleSubmit}>
+    <Box
+      style={{ backgroundImage: `url(${backgroundImage})`, minHeight: '100vh' }}
+    >
+      <ResponsiveAppBar style={{ position: 'fixed', width: '100%' }} />
+      <Box
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        height="100vh"
+      >
+        <Paper elevation={3} style={{ padding: '2rem' }}>
+          <FormControl component="form" onSubmit={handleSubmit}>
             <TextField
               id="username"
               name="username"
@@ -32,6 +40,8 @@ const LoginView = ({ onSubmit }) => {
               variant="outlined"
               fullWidth
               margin="normal"
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
             />
             <TextField
               id="password"
@@ -41,21 +51,34 @@ const LoginView = ({ onSubmit }) => {
               variant="outlined"
               fullWidth
               margin="normal"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
             />
             <FrostyButton
               type="submit"
               variant="contained"
               color="primary"
               fullWidth
+              disabled={isLoading}
             >
-              Login
+              {isLoading ? 'Logging in...' : 'Login'}
             </FrostyButton>
-            </FormControl>
+          </FormControl>
+          {error && (
+            <Typography variant="body1" color="error">
+              {error}
+            </Typography>
+          )}
         </Paper>
       </Box>
       <Box sx={{ marginTop: 'auto' }}>
         <Container maxWidth="lg">
-          <Typography variant="body2" color="text.secondary" align="center" sx={{ py: 3 }}>
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            align="center"
+            sx={{ py: 3 }}
+          >
             © 2023 Playstation 5 Hunter
           </Typography>
         </Container>

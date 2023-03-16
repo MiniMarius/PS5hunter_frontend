@@ -22,8 +22,6 @@ const LoginPresenter = () => {
       dispatch(setAuth(response.data.access));
       console.log(response.data)
 
-      // redirect the user to a protected page
-      // history.push('/dashboard');
     } catch (err) {
       setError(err.response.data);
     }

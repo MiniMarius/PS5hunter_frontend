@@ -21,7 +21,7 @@ const StyledButton = styled(Button)({
 
 const FrostyButton = ({ children, onClick }) => {
   return (
-    <StyledButton variant="contained" onClick={onClick}>
+    <StyledButton type="submit" variant="contained" onClick={onClick}>
       {children}
     </StyledButton>
   );

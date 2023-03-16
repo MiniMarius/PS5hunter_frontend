@@ -27,7 +27,7 @@ function ResultsPresenter () {
       const handleClick = () => {
         setIsLoading(true);
         axios
-          .get("/run_scraper/")
+          .get("/api/run_scraper/")
           .then(() => {
             axios.get("/api/product/")
               .then((response) => {
