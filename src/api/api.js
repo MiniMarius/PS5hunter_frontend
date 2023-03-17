@@ -5,6 +5,10 @@ const api = axios.create({
   baseURL: '/api/',
 });
 
+export const loginApi = axios.create({
+  baseURL: '/api/',
+});
+
 api.interceptors.response.use(
   (response) => {
     return response;
@@ -43,6 +47,18 @@ export const getProductData = async () => {
 export const runScraper = async () => {
   try {
     const response = await api.post('/scraper/run/');
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const login = async (username, password) => {
+  try {
+    const response = await loginApi.post('/auth/token/', {
+      username,
+      password,
+    });
     return response.data;
   } catch (error) {
     console.log(error);
