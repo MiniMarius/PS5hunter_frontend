@@ -6,7 +6,7 @@ const api = axios.create({
 });
 
 export const loginApi = axios.create({
-  baseURL: '/api/',
+  baseURL: '/api/auth',
 });
 
 api.interceptors.response.use(
@@ -55,7 +55,19 @@ export const runScraper = async () => {
 
 export const login = async (username, password) => {
   try {
-    const response = await loginApi.post('/auth/token/', {
+    const response = await loginApi.post('/token/', {
+      username,
+      password,
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const register = async (username, password) => {
+  try {
+    const response = await loginApi.post('/register/', {
       username,
       password,
     });

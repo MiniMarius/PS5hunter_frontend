@@ -2,18 +2,6 @@ import axios from "axios";
 import { SET_AUTH } from "./types";
 import {LOGOUT} from "./types";
 
-export const login = (username, password) => async (dispatch) => {
-  try {
-    const response = await axios.post("/login", {
-      username: username,
-      password: password,
-    });
-    const { data } = response;
-    dispatch(setAuth(data.token));
-  } catch (error) {
-    console.log(error);
-  }
-};
 
 export const setAuth = (token) => {
   console.log('Setting auth token:', token);

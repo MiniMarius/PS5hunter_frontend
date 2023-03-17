@@ -6,6 +6,7 @@ import ResultsPresenter from "./presenter/ResultsPresenter";
 import StartPresenter from "./presenter/StartPresenter";
 import LoginPresenter from "./presenter/LoginPresenter";
 import ProtectedRoute from "./components/ProtectedRoute";
+import RegisterPresenter from "./presenter/RegisterPresenter";
 
   
   const App = () => {
@@ -15,6 +16,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
           <Route path="/" element={<StartPresenter />} />
           <Route path="/results" element={<ProtectedRoute><ResultsPresenter /></ProtectedRoute>} />
           <Route path="/login" element={<LoginPresenter />} />
+          <Route path="/register" element={<RegisterPresenter />} />
         </Routes>
       </Provider>
     );
