@@ -4,7 +4,7 @@ import {LOGOUT} from "./types";
 
 export const login = (username, password) => async (dispatch) => {
   try {
-    const response = await axios.post("your-api-endpoint/login", {
+    const response = await axios.post("/login", {
       username: username,
       password: password,
     });
@@ -34,8 +34,6 @@ export const checkAuth = () => async (dispatch, getState) => {
         token: auth.token,
       });
       console.log('response:', response);
-      const { data } = response;
-      console.log('verification response:', data);
       if (response.status === 200) {
         console.log('token is valid');
         dispatch(setAuth(auth.token));

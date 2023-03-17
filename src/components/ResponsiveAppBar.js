@@ -14,7 +14,7 @@ import GamepadOutlinedIcon from '@mui/icons-material/GamepadOutlined';
 
 
 const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Login'];
+const settings = ['Account','Login'];
 
 
 const ResponsiveAppBar = () => {

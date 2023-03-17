@@ -5,6 +5,23 @@ const api = axios.create({
   baseURL: '/api/',
 });
 
+api.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async (error) => {
+    if (error.response && error.response.status === 401) {
+      // delete the token from local storage
+      localStorage.removeItem('token');
+
+      // navigate to login page
+      window.location = '/login';
+    }
+
+    return Promise.reject(error);
+  }
+);
+
 // Add a request interceptor to include the JWT token in the Authorization header
 api.interceptors.request.use((config) => {
   const { token } = store.getState().auth;
