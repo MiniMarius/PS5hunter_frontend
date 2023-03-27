@@ -5,7 +5,7 @@ const api = axios.create({
   baseURL: '/api/',
 });
 
-export const loginApi = axios.create({
+export const authApi = axios.create({
   baseURL: '/api/auth',
 });
 
@@ -55,7 +55,7 @@ export const runScraper = async () => {
 
 export const login = async (username, password) => {
   try {
-    const response = await loginApi.post('/token/', {
+    const response = await authApi.post('/token/', {
       username,
       password,
     });
@@ -67,10 +67,19 @@ export const login = async (username, password) => {
 
 export const register = async (username, password) => {
   try {
-    const response = await loginApi.post('/register/', {
+    const response = await authApi.post('/register/', {
       username,
       password,
     });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getProfile = async () => {
+  try {
+    const response = await api.get('/user/profile/');
     return response.data;
   } catch (error) {
     console.log(error);
