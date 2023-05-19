@@ -5,7 +5,6 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import MenuItem from "@mui/material/MenuItem";
 import GamepadOutlinedIcon from "@mui/icons-material/GamepadOutlined";
@@ -35,6 +34,10 @@ const ResponsiveAppBar = () => {
   const handleLoginClick = () => {
     navigate('/login')
   };
+
+  const handleAccountClick = () => {
+    navigate('/profile')
+  }
 
   return (
     <AppBar position="fixed" color="inherit" variant="dense">
@@ -98,7 +101,7 @@ const ResponsiveAppBar = () => {
             >
                 {isAuthenticated ? (
                   <>
-                    <MenuItem onClick={handleCloseUserMenu}>
+                    <MenuItem onClick={handleAccountClick}>
                       <Typography textAlign="center">Account</Typography>
                     </MenuItem>
                     <MenuItem onClick={handleLogout}>

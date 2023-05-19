@@ -3,7 +3,7 @@ import ProfileView from '../view/ProfileView';
 import { getProfile } from '../api/api';
 const ProfilePresenter = () => {
   const [userData, setUserData] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
