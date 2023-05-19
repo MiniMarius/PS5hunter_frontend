@@ -11,7 +11,7 @@ import MenuItem from "@mui/material/MenuItem";
 import GamepadOutlinedIcon from "@mui/icons-material/GamepadOutlined";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../redux/actions";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const ResponsiveAppBar = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -29,13 +29,17 @@ const ResponsiveAppBar = () => {
 
   const handleLogout = () => {
     dispatch(logout());
+    navigate("/login");
+  };
+
+  const handleLoginClick = () => {
     navigate('/login')
   };
 
   return (
     <AppBar position="fixed" color="inherit" variant="dense">
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
+        <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
           <Typography
             variant="h6"
             noWrap
@@ -53,17 +57,6 @@ const ResponsiveAppBar = () => {
           >
             PS5 HUNTER
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-          </Box>
           <Typography
             variant="h5"
             noWrap
@@ -103,12 +96,20 @@ const ResponsiveAppBar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">Account</Typography>
-              </MenuItem>
-              <MenuItem onClick={handleLogout}>
-                <Typography textAlign="center">Log Out</Typography>
-              </MenuItem>
+                {isAuthenticated ? (
+                  <>
+                    <MenuItem onClick={handleCloseUserMenu}>
+                      <Typography textAlign="center">Account</Typography>
+                    </MenuItem>
+                    <MenuItem onClick={handleLogout}>
+                      <Typography textAlign="center">Log Out</Typography>
+                    </MenuItem>
+                  </>
+                ) : (
+                  <MenuItem onClick={handleLoginClick}>
+                    <Typography textAlign="center">Log In</Typography>
+                  </MenuItem>
+                )}
             </Menu>
           </Box>
         </Toolbar>
