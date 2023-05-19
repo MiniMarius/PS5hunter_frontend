@@ -1,7 +1,5 @@
 import axios from "axios";
-import { SET_AUTH } from "./types";
-import {LOGOUT} from "./types";
-
+import { SET_AUTH, LOGOUT } from "./types";
 
 export const setAuth = (token) => {
   console.log('Setting auth token:', token);
