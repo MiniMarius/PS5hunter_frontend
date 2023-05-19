@@ -32,15 +32,22 @@ const ResponsiveAppBar = () => {
   };
 
   const handleLoginClick = () => {
-    navigate('/login')
+    navigate("/login");
   };
 
   const handleAccountClick = () => {
-    navigate('/profile')
-  }
+    navigate("/profile");
+  };
 
   return (
-    <AppBar position="fixed" color="inherit" variant="dense">
+    <AppBar
+      position="fixed"
+      color="inherit"
+      variant="dense"
+      sx={{
+        boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+      }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
           <Typography
@@ -99,20 +106,20 @@ const ResponsiveAppBar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-                {isAuthenticated ? (
-                  <>
-                    <MenuItem onClick={handleAccountClick}>
-                      <Typography textAlign="center">Account</Typography>
-                    </MenuItem>
-                    <MenuItem onClick={handleLogout}>
-                      <Typography textAlign="center">Log Out</Typography>
-                    </MenuItem>
-                  </>
-                ) : (
-                  <MenuItem onClick={handleLoginClick}>
-                    <Typography textAlign="center">Log In</Typography>
+              {isAuthenticated ? (
+                <>
+                  <MenuItem onClick={handleAccountClick}>
+                    <Typography textAlign="center">Account</Typography>
                   </MenuItem>
-                )}
+                  <MenuItem onClick={handleLogout}>
+                    <Typography textAlign="center">Log Out</Typography>
+                  </MenuItem>
+                </>
+              ) : (
+                <MenuItem onClick={handleLoginClick}>
+                  <Typography textAlign="center">Log In</Typography>
+                </MenuItem>
+              )}
             </Menu>
           </Box>
         </Toolbar>
