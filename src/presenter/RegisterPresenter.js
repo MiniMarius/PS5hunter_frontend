@@ -10,24 +10,27 @@ const RegisterPresenter = () => {
   const handleRegister = async (username, password) => {
     setIsLoading(true);
     setError(null);
-
     try {
       const response = await register(username, password);
       console.log(response)
+      setIsLoading(false);
       navigate('/login');
 
     } catch (err) {
       setError(err.response.data);
     }
 
-    setIsLoading(false);
   };
+  const handleGoBack = () => {
+    navigate('/login');
+  }
 
   return (
     <RegisterView
       onSubmit={handleRegister}
       isLoading={isLoading}
       error={error}
+      onGoBack={handleGoBack}
     />
   );
 };

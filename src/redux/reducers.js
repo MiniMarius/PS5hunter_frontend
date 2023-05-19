@@ -1,18 +1,25 @@
-import { SET_AUTH } from "../redux/types";
+import { SET_AUTH, LOGOUT } from "../redux/types";
 
 const initialState = {
-  token: localStorage.getItem("token") || null, // get token from local storage or set to null
-  isAuthenticated: !!localStorage.getItem("token"), // set isAuthenticated to true if token exists in localStorage
+  token: localStorage.getItem("token") || null,
+  isAuthenticated: !!localStorage.getItem("token"),
 };
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_AUTH:
-      localStorage.setItem("token", action.payload); // store token in local storage
+      localStorage.setItem("token", action.payload);
       return {
         ...state,
         token: action.payload,
-        isAuthenticated: true, // set isAuthenticated to true when token is set
+        isAuthenticated: true,
+      };
+    case LOGOUT:
+      localStorage.removeItem("token"); // remove token from local storage
+      return {
+        ...state,
+        token: null,
+        isAuthenticated: false
       };
     default:
       return state;

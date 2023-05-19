@@ -8,7 +8,6 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import GamepadOutlinedIcon from '@mui/icons-material/GamepadOutlined';
 
@@ -100,11 +99,9 @@ const ResponsiveAppBar = () => {
                     </Box>
 
                     <Box sx={{flexGrow: 0}}>
-                        <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
                                 <GamepadOutlinedIcon/>
                             </IconButton>
-                        </Tooltip>
                         <Menu
                             sx={{mt: '45px'}}
                             id="menu-appbar"

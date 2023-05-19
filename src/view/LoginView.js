@@ -9,7 +9,7 @@ import Paper from "@mui/material/Paper"
 import { Box } from '@mui/system';
 import { FormControl } from '@mui/material';
 
-const LoginView = ({ onSubmit, isLoading, error }) => {
+const LoginView = ({ onSubmit, isLoading, error, onRegisterClick }) => {
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
 
@@ -62,6 +62,15 @@ const LoginView = ({ onSubmit, isLoading, error }) => {
               disabled={isLoading}
             >
               {isLoading ? 'Logging in...' : 'Login'}
+            </FrostyButton>
+            <FrostyButton
+              onClick={onRegisterClick}
+              variant="contained"
+              color="primary"
+              fullWidth
+              disabled={isLoading}
+            >
+              {'Not a member? Click here!'}
             </FrostyButton>
           </FormControl>
           {error && (

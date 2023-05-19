@@ -31,11 +31,18 @@ const LoginPresenter = () => {
     setIsLoading(false);
   };
 
+  const handleRegisterClick = () => {
+    navigate('/register')
+  }
+
+  
+
   return (
     <LoginView
       onSubmit={handleLogin}
       isLoading={isLoading}
       error={error}
+      onRegisterClick={handleRegisterClick}
     />
   );
 };
